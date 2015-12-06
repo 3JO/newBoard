@@ -32,7 +32,22 @@
 	
 	<sql id="cri">
 		<if test="searchType eq 't'.toString()">
-			and title like CONCAT('%'||#{keyword}||'%')
+			and title like ('%'||#{keyword}||'%')
+		</if>
+		<if test="searchType eq 'c'.toString()">
+			and title like ('%'||#{keyword}||'%')
+		</if>
+		<if test="searchType eq 'w'.toString()">
+			and title like ('%'||#{keyword}||'%')
+		</if>
+		<if test="searchType eq 'tc'.toString()">
+			and (title like ('%'||#{keyword}||'%') or content like ('%'||#{keyword}||'%'))
+		</if>
+		<if test="searchType eq 'tw'.toString()">
+			and (title like ('%'||#{keyword}||'%') or writer like ('%'||#{keyword}||'%'))
+		</if>
+		<if test="searchType eq 'tcw'.toString()">
+			and (title like ('%'||#{keyword}||'%') or content like ('%'||#{keyword}||'%') or writer like ('%'||#{keyword}||'%'))
 		</if>
 	</sql>
 
@@ -41,21 +56,21 @@
 	select * from
 	(
 	select /*+index_desc(tbl_board pk_board)*/ 
-	rownum rn, bno, title, writer, regdate, viecnt from tbl_board
+	rownum rn, bno, title, writer, regdate, viewcnt from tbl_board
 	where bno >  0
 	]]>
 	<include refid="cri"></include>
 	<![CDATA[
-	and rownum <= #{page} * #{perPage}
+	and rownum <= #{pageNo} * #{perPage}
 	)
-	where rn>(#{page}-1)*#{perPage}
-	]]>;
+	where rn>(#{pageNo}-1)*#{perPage}
+	]]>
 	</select>
 
 	<select id="searchCount" resultType="int">
 	<![CDATA[
 	select count(*) from tbl_board where bno > 0
-	]]>;
+	]]>
 	<include refid="cri"></include>
 	</select>
 </mapper>

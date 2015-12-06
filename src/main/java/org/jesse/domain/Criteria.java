@@ -2,25 +2,23 @@ package org.jesse.domain;
 
 public class Criteria {
 
-	private int page;
+	private int pageNo;
 	private String type;
 	private String keyword;
 	private String SearchType;
 	private int perPage;
-	
-	
-	
+
 	public Criteria() {
-		this.page=1;
+		this.pageNo = 1;
 		this.perPage = 10;
 	}
-	
+
 	public int getPage() {
-		return page;
+		return pageNo;
 	}
 
-	public void setPage(int page) {
-		this.page = page;
+	public void setPage(int pageNo) {
+		this.pageNo = pageNo;
 	}
 
 	public String getType() {
@@ -38,7 +36,7 @@ public class Criteria {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	
+
 	public String getSearchType() {
 		return SearchType;
 	}
@@ -57,8 +55,10 @@ public class Criteria {
 
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", type=" + type + ", keyword=" + keyword + ", SearchType=" + SearchType
+		return "Criteria [pageNo=" + pageNo + ", type=" + type + ", keyword=" + keyword + ", SearchType=" + SearchType
 				+ ", perPage=" + perPage + "]";
 	}
+
+	
 
 }

@@ -43,9 +43,78 @@
 						</c:forEach>
 
 					</table>
+					<select id="searchType">
+						<option value="n"
+							<c:out value="${cri.searchType == null?'selected':''}"/>>
+							Choice</option>
+						<option value="t"
+							<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+							Title</option>
+						<option value="c"
+							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
+							Content</option>
+						<option value="w"
+							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
+							Writer</option>
+						<option value="tc"
+							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
+							Title OR Content</option>
+						<option value="cw"
+							<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
+							Content OR Writer</option>
+						<option value="tcw"
+							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
+							Title OR Content OR Writer</option>
+					</select> <input type="text" name='keyword' id="keywordInput"
+						value='${cri.keyword }'>
+					<button id='searchBtn'>Search</button>
+
+					<ul class="pagination" id="pageUL"></ul>
 
 				</div>
 				<!-- /.box-body -->
+				<script src="/resources/pageMaker.js"></script>
+				<script>
+					$(document)
+							.ready(
+									function() {
+										var cri = {
+											pageNo : 12,
+											totalCount : 151,
+											perPage : 10,
+											searchType : 'w',
+											keyword : "홍길동"
+										};
+
+										$("#pageUL").html(makePage(cri));
+
+										$("#pageUL").on(
+												"click",
+												"li a",
+												function(event) {
+													event.preventDefault();
+													var targetPage = $(this)
+															.attr("href");
+													console.log(targetPage);
+												});
+
+										var options = $("#searchType option");
+										console.log("options size : "
+												+ options.size());
+
+										console
+												.log($("#searchType option[value="
+														+ cri.searchType + "]"));
+
+										$(
+												"#searchType option[value="
+														+ cri.searchType + "]")
+												.attr("selected", "true");
+
+										$("#keyword").val(cri.keyword);
+									});
+				</script>
+
 				<div class="box-footer">
 					<a href="/board/register?bno=1">
 						<button type="submit" class="btn btn-primary">Regist</button>

@@ -3,6 +3,7 @@ package org.jesse.service;
 import java.util.List;
 
 import org.jesse.domain.BoardVO;
+import org.jesse.domain.Criteria;
 
 public interface BoardService {
 
@@ -15,4 +16,6 @@ public interface BoardService {
 	public void remove(Integer bno) throws Exception;
 
 	public List<BoardVO> listAll() throws Exception;
+	
+	public List<BoardVO> search(Criteria cri) throws Exception;
 }

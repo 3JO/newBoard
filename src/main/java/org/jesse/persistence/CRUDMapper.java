@@ -15,9 +15,4 @@ public interface CRUDMapper<V, K> {
 	
 	public void delete(K key) throws Exception;
 	
-	public List<BoardVO> listAll() throws Exception;
-	
-	public List<BoardVO> search(Criteria cri) throws Exception;
-	
-	public int searchCount(Criteria cri)throws Exception;
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller("boardController")
+@Controller
 @RequestMapping("/board/*")
 public class BoardController {
 	
@@ -33,7 +33,7 @@ public class BoardController {
 	  public String registPOST(BoardVO vo, RedirectAttributes rttr) throws Exception {
 
 	    logger.info("regist post ...........");
-	    logger.info(vo.toString());
+//	    logger.info(vo.toString());
 
 	    service.regist(vo);
 
@@ -83,10 +83,12 @@ public class BoardController {
 	  
 	  
 	  @RequestMapping(value="/slist", method=RequestMethod.GET)
-	  public void listSearch(@ModelAttribute("cri")Criteria cri) throws Exception {
+	  public String listSearch(@ModelAttribute("cri")Criteria cri, Model model) throws Exception {
 		  logger.info("444444444444444");
 		  logger.info(cri.toString());
 		  logger.info("444444444444444");
+		  model.addAttribute("list", service.search(cri));
+		  return "/board/listAll";
 		  
 	  }
 
